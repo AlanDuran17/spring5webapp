@@ -1,0 +1,87 @@
+openapi: 3.0.2
+info:
+  title: OpenAPI Course
+  description: Specification for OpenAPI Course
+  termsOfService: http://example.com/terms/
+  contact:
+    name: John Thompson
+    url: https://springframework.guru
+    email: john@springframework.guru
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: "1.0"
+servers:
+  - url: https://dev.example.com
+    description: Development Server
+
+  - url: https://qa.example.com
+    description: Quality Assurance Server
+
+  - url: https://prod.example.com
+    description: Production Server
+paths:
+  /v1/customers:
+    get:
+      responses:
+        200:
+          description: List of Customers
+  /v1/beers:
+    get:
+      responses:
+        200:
+          description: ok
+          content:
+            application/json:
+              schema:
+                type: array
+                description: List of Beers
+                items:
+                  type: object
+                  description: Beer Item
+                  properties:
+                    name:
+                      type: string
+                      minLength: 0
+                      maxLength: 25
+                      example: Imperial
+                      nullable: false
+                    style:
+                      description: Style of the beer
+                      type: string
+                      enum:
+                        - ALE
+                        - PALE_ALE
+                        - IPA
+                        - WHEAT
+                        - LAGER
+                      nullable: false
+                    upc:
+                      type: string
+                      description: Universal Product Code
+                      nullable: false
+                      example: 123456789123
+                    price:
+                      type: number
+                      format: float
+                      nullable: false
+                      example: 9.99
+                    quantity_on_hand:
+                      type: integer
+                      format: int32
+                      nullable: false
+                      example: 6
+                    brewery:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          nullable: false
+                          example: Statesman
+                        location:
+                          type: string
+                          nullable: false
+                          example: Kentucky, USA
+        400:
+          description: No Beers Found
+components: {}
